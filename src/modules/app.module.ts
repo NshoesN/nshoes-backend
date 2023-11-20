@@ -3,11 +3,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from '../controller/app.controller';
 import { AppService } from '../service/app.service';
 import { AuthModule } from './auth.module';
-import { UserModule } from './user.module';
+import { User } from '../entities/user.entity';
+
 
 @Module({
   imports: [
-    UserModule ,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'svc.sel5.cloudtype.app',
+      port: 32243,
+      username: 'root',
+      password: '0810',
+      database: 'shopping',
+      entities: [User],
+      synchronize: true,
+    }),
     AuthModule
   ],
   controllers: [AppController],

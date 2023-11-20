@@ -8,7 +8,6 @@ export class CreateUserRequestDto {
 
   @IsNotEmpty()
   @IsString()
-  
   username: string
   
   @IsNotEmpty()
