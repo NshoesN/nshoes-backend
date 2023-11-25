@@ -14,7 +14,7 @@ import { User } from '../entities/user.entity';
       port: 32243,
       username: 'root',
       password: '0810',
-      database: 'shopping',
+      database: 'test',
       entities: [User],
       synchronize: true,
     }),

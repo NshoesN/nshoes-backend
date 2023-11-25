@@ -7,10 +7,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class AuthService {
   constructor (
     @InjectRepository(User)
-    private readonly userRepo: Repository<User> 
+    private userRepo: Repository<User> 
   ){}
 
-  async CreateUser({email , username , password}){
-    return await this.userRepo.save({email , username , password}); 
+  async FindUser(user) {
+    return await this.userRepo.findOne(user)
+  }
+
+  async CreateUser(user: {email: string , username: string , password: string}) {
+
+    const newUser = this.userRepo.create(user);
+    return await this.userRepo.save(newUser);
   }
 }
