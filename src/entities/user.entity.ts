@@ -2,6 +2,7 @@ import {
   Entity, 
   Column, 
   PrimaryGeneratedColumn, 
+  CreateDateColumn, 
   BeforeInsert 
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
@@ -12,17 +13,17 @@ export class User {
   @PrimaryGeneratedColumn()
   user_id: number;
 
-  @Column({ default: true })
+  @Column("varchar", { default: true })
   email: string;
 
-  @Column({ default: true, length: 20 })
+  @Column("varchar", { default: true, length: 20 })
   username: string;
   
-  @Column({ default: true, length: 10 })
+  @Column("varchar", { default: true })
   password: string;
   
-  @Column({ default: true})
-  create_time: Date;
+  @CreateDateColumn({ type: 'timestamp'})
+  createTime: Date;
 
   @BeforeInsert()
   private beforeInsert(){

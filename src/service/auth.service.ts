@@ -1,22 +1,37 @@
-import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable, UnauthorizedException } from '@nestjs/common'
+import { userLoginRequestdto } from '../dto/user.login'
+
+import * as bcrypt from 'bcryptjs'
+import { JwtService } from "@nestjs/jwt"
+import { Payload } from '../security/payload.interface'
+import { userService } from './user.service'
 
 @Injectable()
-export class AuthService {
+export class authService {
   constructor (
-    @InjectRepository(User)
-    private userRepo: Repository<User> 
-  ){}
+    private readonly jwtService: JwtService,
+    private readonly userService: userService
+  ) { }
+  
+  async SignIn(user: userLoginRequestdto) {
+    const { email, password } = user
+    const userInfor = await this.userService.FindUser("email",email)
+    
+    if (!userInfor) { 
+      throw new UnauthorizedException('email을 확인해주세요~')
+    }
 
-  async FindUser(user) {
-    return await this.userRepo.findOne(user)
-  }
+    const isPasswordVaildated: boolean = await bcrypt.compare(
+      password,userInfor.password
+    )
 
-  async CreateUser(user: {email: string , username: string , password: string}) {
-
-    const newUser = this.userRepo.create(user);
-    return await this.userRepo.save(newUser);
+    if (!isPasswordVaildated)
+      throw new UnauthorizedException('password를 확인해주세요~')
+    
+    const payload: Payload = { email: userInfor.email }
+    
+    return {
+      JwtToken: this.jwtService.sign(payload)
+    };
   }
 }
