@@ -11,7 +11,7 @@ import { userInforModule } from './userInfor.module';
 import { ProductImage } from '../entities/productImage.entity';
 import { Product } from '../entities/product.entity';
 import { productModule } from './product.module';
-
+import { cartModule } from './cart.module';
 
 @Module({
   imports: [
@@ -29,6 +29,7 @@ import { productModule } from './product.module';
     authModule,
     userInforModule,
     productModule,
+    cartModule
   ],
   controllers: [AppController],
   providers: [AppService],

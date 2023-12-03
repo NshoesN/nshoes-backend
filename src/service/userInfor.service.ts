@@ -6,8 +6,13 @@ import { userEditdto } from '../dto/user.edit'
 export class userInforService {
   constructor (
     private readonly userService: userService
-  ){}
+  ) { }
   
+
+  async decrytpe(request: string) { 
+    
+  }
+
   async EditInfor(id: number , user: userEditdto) { 
     const userInfor = await this.userService.FindUser("user_id", id)
     

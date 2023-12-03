@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { Product } from '../entities/product.entity'
-import {  ProductImage }  from '../entities/productImage.entity'
+import { ProductImage }  from '../entities/productImage.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm';
 
@@ -33,7 +33,6 @@ export class productsService {
     })
     
     product['ImageURL'] = Image
-
     return product
   }
 }
