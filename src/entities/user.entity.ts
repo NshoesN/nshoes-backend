@@ -8,7 +8,7 @@ import {
 import * as bcrypt from 'bcryptjs';
 
 
-@Entity({name: 'user_infor'})
+@Entity({name: 'users'})
 export class User {
   @PrimaryGeneratedColumn()
   user_id: number;
@@ -17,7 +17,7 @@ export class User {
   email: string;
 
   @Column("varchar", { default: true, length: 20 })
-  username: string;
+  name: string;
   
   @Column("varchar", { default: true })
   password: string;

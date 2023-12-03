@@ -8,6 +8,9 @@ import { AppService } from '../service/app.service';
 import { userModule } from './user.module';
 import { authModule } from './auth.module';
 import { userInforModule } from './userInfor.module';
+import { ProductImage } from '../entities/productImage.entity';
+import { Product } from '../entities/product.entity';
+import { productModule } from './product.module';
 
 
 @Module({
@@ -18,13 +21,14 @@ import { userInforModule } from './userInfor.module';
       port: 32243,
       username: 'root',
       password: '0810',
-      database: 'test',
-      entities: [User],
+      database: 'shopping',
+      entities: [User , ProductImage , Product],
       synchronize: true,
     }),
     userModule,
     authModule,
     userInforModule,
+    productModule,
   ],
   controllers: [AppController],
   providers: [AppService],

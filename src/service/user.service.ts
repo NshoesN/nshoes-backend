@@ -19,6 +19,10 @@ export class userService {
     })
   }
 
+  async FindAll() {
+    return await this.userRepo.find()
+  }
+
   async CreateUser(user: userRequestdto) {
     const newUser = this.userRepo.create(user)
     return await this.userRepo.save(newUser)
@@ -30,7 +34,7 @@ export class userService {
         user_id: id
       },
       {
-        username: username,
+        name: username,
         email: email,
       })
   }
